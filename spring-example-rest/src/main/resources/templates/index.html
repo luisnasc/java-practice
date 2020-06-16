@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List of People</title>
+</head>
+<body>
+    <div th:if="${message}" th:text="${message}" th:class="${'alert ' + alertClass}"/>
+    <h1>List of People</h1>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Last Name</th>
+            <th>Age</th>
+            <th>Cellphone</th>
+            <th>Options</th>
+        </tr>
+        <tr th:each="person : ${allPeople}">
+            <td th:text="${person.name}"> </td>
+            <td th:text="${person.lastName}"> </td>
+            <td th:text="${person.age}"> </td>
+            <td th:text="${person.number}"> </td>
+            <td>
+                <a th:href="@{/person/__${person.id}__/delete}" onClick="return confirm('Are you sure?')">Delete</a>
+                <a th:href="@{/person/__${person.id}__/update}">Update</a>
+                <a th:href="@{/person/__${person.id}__/show}">Show</a>
+            </td>
+        </tr>
+    </table>
+
+    <a href ="#" th:href="@{/new-person}">New Person</a>
+</body>
+</html>

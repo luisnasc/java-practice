@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New Person</title>
+</head>
+<body>
+
+    <h1><span th:if="${person.name==null}">  Create a new Person</span></h1>
+    <h1><span th:unless="${person.name==null}">  Update a Person</span></h1>
+
+    <form th:action="@{/index}" th:object="${person}" method="post">
+
+        <input type="hidden" name="id" th:field="*{id}" th:placeholder="Id"/>
+
+        <input type="text" name="name"   th:value="${person.name}"    th:field="*{name}"     th:placeholder="Name"/> <br/>
+        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</span>
+        <br/>
+
+        <input type="text" name="lastName" th:field="*{lastName}" th:placeholder="LastName"/> <br/>
+        <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last Name Error</span>
+        <br/>
+
+        <input type="text" name="age" th:field="*{age}" th:placeholder="Age"/> <br/>
+        <span th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Number Error</span>
+        <br/>
+
+        <input type="text" name="number" th:field="*{number}" th:placeholder="Number"/> <br/>
+        <span th:if="${#fields.hasErrors('number')}" th:errors="*{number}">Cell Phone number Error</span>
+        <br/>
+
+        <button type="submit"  th:if="${person.name==null}">Create</button>
+        <button type="submit" th:unless="${person.name==null}">Update</button>
+    </form>
+
+    <br>
+
+    <a th:href="@{/}">List of People</a>
+
+</body>
+</html>
